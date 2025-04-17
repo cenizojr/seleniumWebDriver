@@ -22,14 +22,14 @@ public class EditProfileTest {
 
 	switch (browser) {
 	  case 0: // firefox
-		WebDriverManager.firefoxdriver().setup();
+		// WebDriverManager.firefoxdriver().setup();
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		if (headless) firefoxOptions.addArguments("-headless");
 		driver = new FirefoxDriver(firefoxOptions);
 	
 		break;
 	  case 1: // chrome
-		WebDriverManager.chromedriver().setup();
+		// WebDriverManager.chromedriver().setup();
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
 		driver = new ChromeDriver(chromeOptions);
