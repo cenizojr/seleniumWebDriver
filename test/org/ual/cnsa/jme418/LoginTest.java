@@ -3,7 +3,6 @@ package org.ual.cnsa.jme418;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.*;
@@ -22,14 +21,12 @@ public class LoginTest {
 
 	switch (browser) {
 	  case 0: // firefox
-		// WebDriverManager.firefoxdriver().setup();
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		if (headless) firefoxOptions.addArguments("-headless");
 		driver = new FirefoxDriver(firefoxOptions);
 	
 		break;
 	  case 1: // chrome
-		// WebDriverManager.chromedriver().setup();
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
 		driver = new ChromeDriver(chromeOptions);
@@ -84,7 +81,17 @@ public class LoginTest {
     // 12 | assertText | xpath=//h1 | Welcome!
     assertEquals("Welcome!", driver.findElement(By.xpath("//h1")).getText());
     // 13 | click | id=header-account-menu-link | 
-    driver.findElement(By.id("header-account-menu-link")).click();
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
+      try {
+    	Thread.sleep(500);
+      } catch (InterruptedException e) {
+    	e.printStackTrace();
+      }
+
+      driver.findElement(By.id("header-account-menu-link")).click();
+    }
     // 14 | click | xpath=//a[contains(text(),'Sign out')] | 
     driver.findElement(By.xpath("//a[contains(text(),\'Sign out\')]")).click();
     // 15 | assertText | xpath=//h1 | Sign in to your account
@@ -153,7 +160,17 @@ public class LoginTest {
     // 12 | assertText | xpath=//h1 | Welcome!
     assertEquals("Welcome!", driver.findElement(By.xpath("//h1")).getText());
     // 13 | click | id=header-account-menu-link | 
-    driver.findElement(By.id("header-account-menu-link")).click();
+    {
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+      wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
+      try {
+    	Thread.sleep(500);
+      } catch (InterruptedException e) {
+    	e.printStackTrace();
+      }
+
+      driver.findElement(By.id("header-account-menu-link")).click();
+    }
     // 14 | click | xpath=//a[contains(text(),'Sign out')] | 
     driver.findElement(By.xpath("//a[contains(text(),\'Sign out\')]")).click();
     // 15 | assertText | xpath=//h1 | Sign in to your account
