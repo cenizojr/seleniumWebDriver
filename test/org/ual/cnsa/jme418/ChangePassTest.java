@@ -40,7 +40,7 @@ public class ChangePassTest {
 		if (headless) chromeOptions.addArguments("--headless=new");
 
 		try {
-			Path tempUserDataDir = Files.createTempDirectory("chrome-profile-");
+			Path tempUserDataDir = Files.createTempDirectory("chrome-profile-" + System.currentTimeMillis());
 			chromeOptions.addArguments("--user-data-dir=" + tempUserDataDir.toAbsolutePath().toString());
 		} catch (Exception e) {
 			fail("Failed to create temporary user-data-dir for Chrome");
