@@ -39,9 +39,6 @@ public class ChangePassTest {
 
 		chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox", "--remote-allow-origins=*");
 
-		String userDataDir = "/tmp/chrome-profile-" + UUID.randomUUID();
-		chromeOptions.addArguments("--user-data-dir=" + userDataDir);
-
 		driver = new ChromeDriver(chromeOptions);
 	
 		break;
