@@ -21,9 +21,9 @@ public class ChangePassTest {
 	Boolean headless = true;
 	
 	try {
-		browser = System.getProperty("browser");
+	  browser = System.getProperty("browser");
 	} catch (Exception e) {
-		fail("Error in Maven call parameters.");
+	  fail("Error in Maven call parameters.");
 	}
 
 	switch (browser) {
