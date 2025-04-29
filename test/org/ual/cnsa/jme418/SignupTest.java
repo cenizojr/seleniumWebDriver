@@ -14,36 +14,45 @@ public class SignupTest {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
+
   @BeforeEach
   public void setUp() {
-	int browser = 0; // 0: firefox, 1: chrome...
+	String browser = "";
 	Boolean headless = true;
+	
+	try {
+		browser = System.getProperty("browser");
+	} catch (Exception e) {
+		fail("Error in Maven call parameters.");
+	}
 
 	switch (browser) {
-	  case 0: // firefox
+	  case "firefox":
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		if (headless) firefoxOptions.addArguments("-headless");
 		driver = new FirefoxDriver(firefoxOptions);
 	
 		break;
-	  case 1: // chrome
+	  case "chrome":
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
 		driver = new ChromeDriver(chromeOptions);
 	
 		break;
 	  default:
-		fail("Please select a browser");
+		fail("Please select a browser.");
 		break;
 	}
 
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
+
   @AfterEach
   public void tearDown() {
     driver.quit();
   }
+
   @Test
   public void signupNotCheckedTerms() {
     // Test name: signupNotCheckedTerms
@@ -72,6 +81,7 @@ public class SignupTest {
       assert(elements.size() > 0);
     }
   }
+
   @Test
   public void signup() {
     // Test name: signup
@@ -101,7 +111,7 @@ public class SignupTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
       try {
-    	Thread.sleep(500);
+    	Thread.sleep(1000);
       } catch (InterruptedException e) {
     	e.printStackTrace();
       }
@@ -113,7 +123,7 @@ public class SignupTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
       try {
-    	Thread.sleep(500);
+    	Thread.sleep(1000);
       } catch (InterruptedException e) {
     	e.printStackTrace();
       }
@@ -125,6 +135,7 @@ public class SignupTest {
     // 15 | assertText | xpath=//h1 | Sign in to your account
     assertEquals("Sign in to your account", driver.findElement(By.xpath("//h1")).getText());
   }
+
   @Test
   public void signupNotValidMail() {
     // Test name: signupNotValidMail
@@ -148,6 +159,7 @@ public class SignupTest {
     // 9 | assertText | xpath=//div[2]/div | Please enter a valid email address.
     assertEquals("Please enter a valid email address.", driver.findElement(By.xpath("//div[2]/div")).getText());
   }
+
   @Test
   public void signupNotValidName() {
     // Test name: signupNotValidName
@@ -173,6 +185,7 @@ public class SignupTest {
     // 10 | assertText | xpath=//form/div/div | Please enter your full name.
     assertEquals("Please enter your full name.", driver.findElement(By.xpath("//form/div/div")).getText());
   }
+
   @Test
   public void signupNotValidPass() {
     // Test name: signupNotValidPass
@@ -200,6 +213,7 @@ public class SignupTest {
     // 11 | click | xpath=//div[4]/div | Your password and confirmation do not match.
     driver.findElement(By.xpath("//div[4]/div")).click();
   }
+
   @Test
   public void signupNotValidPassConf() {
     // Test name: signupNotValidPassConf

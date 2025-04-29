@@ -14,36 +14,45 @@ public class LoginTest {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
+
   @BeforeEach
   public void setUp() {
-	int browser = 0; // 0: firefox, 1: chrome...
+	String browser = "";
 	Boolean headless = true;
+	
+	try {
+		browser = System.getProperty("browser");
+	} catch (Exception e) {
+		fail("Error in Maven call parameters.");
+	}
 
 	switch (browser) {
-	  case 0: // firefox
+	  case "firefox":
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 		if (headless) firefoxOptions.addArguments("-headless");
 		driver = new FirefoxDriver(firefoxOptions);
 	
 		break;
-	  case 1: // chrome
+	  case "chrome":
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
 		driver = new ChromeDriver(chromeOptions);
 	
 		break;
 	  default:
-		fail("Please select a browser");
+		fail("Please select a browser.");
 		break;
 	}
 
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
   }
+
   @AfterEach
   public void tearDown() {
     driver.quit();
   }
+
   @Test
   public void login() {
     // Test name: login
@@ -73,7 +82,7 @@ public class LoginTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
       try {
-      	Thread.sleep(500);
+      	Thread.sleep(1000);
       } catch (InterruptedException e) {
       	e.printStackTrace();
       }
@@ -85,7 +94,7 @@ public class LoginTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
       try {
-    	Thread.sleep(500);
+    	Thread.sleep(1000);
       } catch (InterruptedException e) {
     	e.printStackTrace();
       }
@@ -109,7 +118,7 @@ public class LoginTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
       try {
-      	Thread.sleep(500);
+      	Thread.sleep(1000);
       } catch (InterruptedException e) {
       	e.printStackTrace();
       }
@@ -123,6 +132,7 @@ public class LoginTest {
     // 24 | assertText | xpath=//h1 | Sign in to your account
     assertEquals("Sign in to your account", driver.findElement(By.xpath("//h1")).getText());
   }
+
   @Test
   public void loginNotValid() {
     // Test name: loginNotValid
@@ -152,7 +162,7 @@ public class LoginTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
       try {
-      	Thread.sleep(500);
+      	Thread.sleep(1000);
       } catch (InterruptedException e) {
       	e.printStackTrace();
       }
@@ -164,7 +174,7 @@ public class LoginTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
       try {
-    	Thread.sleep(500);
+    	Thread.sleep(1000);
       } catch (InterruptedException e) {
     	e.printStackTrace();
       }
