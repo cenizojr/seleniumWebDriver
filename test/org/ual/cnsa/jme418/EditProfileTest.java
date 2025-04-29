@@ -83,7 +83,7 @@ public class EditProfileTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
       try {
-      	Thread.sleep(2000);
+      	Thread.sleep(5000);
       } catch (InterruptedException e) {
       	e.printStackTrace();
       }
@@ -95,7 +95,7 @@ public class EditProfileTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
       try {
-    	Thread.sleep(2000);
+    	Thread.sleep(5000);
       } catch (InterruptedException e) {
     	e.printStackTrace();
       }
@@ -145,7 +145,7 @@ public class EditProfileTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
       try {
-      	Thread.sleep(2000);
+      	Thread.sleep(5000);
       } catch (InterruptedException e) {
       	e.printStackTrace();
       }
@@ -189,7 +189,7 @@ public class EditProfileTest {
 	  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	  wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h1[contains(.,\'Sign in to your account\')]")));
 	  try {
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 	  } catch (InterruptedException e) {
 		e.printStackTrace();
 	  }
@@ -201,7 +201,7 @@ public class EditProfileTest {
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.elementToBeClickable(By.id("header-account-menu-link")));
       try {
-    	Thread.sleep(2000);
+    	Thread.sleep(5000);
       } catch (InterruptedException e) {
     	e.printStackTrace();
       }
