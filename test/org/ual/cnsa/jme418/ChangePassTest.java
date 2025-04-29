@@ -39,6 +39,8 @@ public class ChangePassTest {
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
 
+		chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox, --remote-allow-arigins=*");
+
 		try {
 			Path tempUserDataDir = Files.createTempDirectory("chrome-profile-" + System.currentTimeMillis());
 			chromeOptions.addArguments("--user-data-dir=" + tempUserDataDir.toAbsolutePath().toString());
