@@ -7,6 +7,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.support.ui.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.*;
 
@@ -36,6 +38,14 @@ public class ChangePassTest {
 	  case "chrome":
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
+
+		try {
+			Path tempUserDataDir = Files.createTempDirectory("chrome-profile-");
+			chromeOptions.addArguments("--user-data-dir=" + tempUserDataDir.toAbsolutePath().toString());
+		} catch (Exception e) {
+			fail("Failed to create temporary user-data-dir for Chrome");
+		}
+
 		driver = new ChromeDriver(chromeOptions);
 	
 		break;
