@@ -37,7 +37,10 @@ public class SignupTest {
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
 
-		chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox, --remote-allow-arigins=*");
+		chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox", "--remote-allow-origins=*");
+
+		String userDataDir = "/tmp/chrome-profile-" + UUID.randomUUID();
+		chromeOptions.addArguments("--user-data-dir=" + userDataDir);
 
 		driver = new ChromeDriver(chromeOptions);
 	
