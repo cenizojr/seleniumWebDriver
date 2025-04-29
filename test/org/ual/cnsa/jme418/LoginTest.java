@@ -36,6 +36,7 @@ public class LoginTest {
 	  case "chrome":
 		ChromeOptions chromeOptions = new ChromeOptions();
 		if (headless) chromeOptions.addArguments("--headless=new");
+		chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox", "--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 	
 		break;
